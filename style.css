@@ -86,7 +86,7 @@ a {
 .cards-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, 250px);
-    grid-auto-rows: 400px;
+    grid-auto-rows: 500px;
     gap: 1.5rem 1rem;
     justify-content: center;
     padding: 3rem 1vw;
@@ -100,6 +100,16 @@ a {
     border-radius: 1rem;
     overflow: hidden;
     text-align: center; 
+    transition: 0.1s;
+}
+
+.card:hover {
+    transform: scale(1.01);
+    box-shadow: 0 0 0 1px var(--color-border),2px 2px 4px black;
+}
+
+.card.watched:hover {
+    box-shadow: 0 0 0 1px var(--color-watched-border),2px 2px 4px black;
 }
 
 .card.watched {
@@ -121,6 +131,8 @@ a {
 
 .poster {
     background-color: grey;
+    background-size: cover;
+    background-position: center;
     justify-self: stretch;
 }
 
@@ -203,6 +215,7 @@ a {
     justify-self: center;
     position: sticky;
     bottom: 2rem;
+    box-shadow: 3px 3px 3px var(--color-background);
 }
 
 .gradient {

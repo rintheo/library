@@ -1,21 +1,22 @@
-const anime1 = new Anime("Attack on Titan", "Wit Studio", 75, true),
-      anime2 = new Anime("One Piece", "Toei Animation", 1000, false),
-      anime3 = new Anime("My Hero Academia", "Bones", 113, true),
-      anime4 = new Anime("Death Note", "Madhouse", 37, true),
-      anime5 = new Anime("Fullmetal Alchemist: Brotherhood", "Bones", 64, true),
-      anime6 = new Anime("Demon Slayer", "ufotable", 26, true),
-      anime7 = new Anime("Hunter x Hunter", "Madhouse", 148, false),
-      anime8 = new Anime("Haikyuu!!", "Production I.G", 85, false),
-      anime9 = new Anime("Steins;Gate", "White Fox", 24, true),
-      anime10 = new Anime("Sword Art Online", "A-1 Pictures", 97, true);
+const anime1 = new Anime("Attack on Titan", "Wit Studio", 75, true, 'https://cdn.myanimelist.net/images/anime/10/47347.jpg'),
+      anime2 = new Anime("One Piece", "Toei Animation", 1000, false, 'https://cdn.myanimelist.net/images/anime/6/73245.jpg'),
+      anime3 = new Anime("My Hero Academia", "Bones", 113, true, 'https://cdn.myanimelist.net/images/anime/10/78745.jpg'),
+      anime4 = new Anime("Death Note", "Madhouse", 37, true, 'https://cdn.myanimelist.net/images/anime/1001/121564.jpg'),
+      anime5 = new Anime("Fullmetal Alchemist: Brotherhood", "Bones", 64, true, 'https://cdn.myanimelist.net/images/anime/1208/94745.jpg'),
+      anime6 = new Anime("Demon Slayer", "ufotable", 26, true, 'https://cdn.myanimelist.net/images/anime/1286/99889.jpg'),
+      anime7 = new Anime("Hunter x Hunter", "Madhouse", 148, false, 'https://cdn.myanimelist.net/images/anime/1337/99013.jpg'),
+      anime8 = new Anime("Haikyuu!!", "Production I.G", 85, false, 'https://cdn.myanimelist.net/images/anime/7/76014.jpg'),
+      anime9 = new Anime("Steins;Gate", "White Fox", 24, true, 'https://cdn.myanimelist.net/images/anime/1935/127974.jpg'),
+      anime10 = new Anime("Sword Art Online", "A-1 Pictures", 97, true, 'https://cdn.myanimelist.net/images/anime/11/39717.jpg');
 
 let myAniLib = [anime1, anime2, anime3, anime4, anime5, anime6, anime7, anime8, anime9, anime10];
 
-function Anime(title, studio, episodes, watched) {
+function Anime(title, studio, episodes, watched, image) {
     this.title = title,
     this.studio = studio,
     this.episodes = episodes,
-    this.watched = watched
+    this.watched = watched,
+    this.image = image
 };
 
 Anime.prototype.info = function() {
@@ -39,6 +40,7 @@ function createCard(anime) {
 
         const divPoster = document.createElement('div');
         divPoster.classList.add('poster');
+        if (anime.image) {divPoster.style.backgroundImage = `url(${anime.image})`};
 
         const h2Title = document.createElement('h2');
         h2Title.classList.add('title');
