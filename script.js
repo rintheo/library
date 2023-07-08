@@ -7,9 +7,13 @@ const anime1 = new Anime("Attack on Titan", "Wit Studio", 75, true, 'https://cdn
       anime7 = new Anime("Hunter x Hunter", "Madhouse", 148, false, 'https://cdn.myanimelist.net/images/anime/1337/99013.jpg'),
       anime8 = new Anime("Haikyuu!!", "Production I.G", 85, false, 'https://cdn.myanimelist.net/images/anime/7/76014.jpg'),
       anime9 = new Anime("Steins;Gate", "White Fox", 24, true, 'https://cdn.myanimelist.net/images/anime/1935/127974.jpg'),
-      anime10 = new Anime("Sword Art Online", "A-1 Pictures", 97, true, 'https://cdn.myanimelist.net/images/anime/11/39717.jpg');
+      anime10 = new Anime("Sword Art Online", "A-1 Pictures", 97, true, 'https://cdn.myanimelist.net/images/anime/11/39717.jpg'),
+      anime11 = new Anime("Code Geass", "Sunrise", 50, true, 'https://cdn.myanimelist.net/images/anime/1032/135088.jpg'),
+      anime12 = new Anime("Cowboy Bebop", "Sunrise", 26, true, 'https://cdn.myanimelist.net/images/anime/4/19644.jpg'),
+      anime13 = new Anime("One Punch Man", "Madhouse", 24, false, 'https://cdn.myanimelist.net/images/anime/12/76049.jpg'),
+      anime14 = new Anime("Naruto", "Pierrot", 220, false, 'https://cdn.myanimelist.net/images/anime/13/17405.jpg');
 
-let myAniLib = [anime1, anime2, anime3, anime4, anime5, anime6, anime7, anime8, anime9, anime10];
+let myAniLib = [anime1, anime2, anime3, anime4, anime5, anime6, anime7, anime8, anime9, anime10, anime11, anime12, anime13, anime14];
 
 function Anime(title, studio, episodes, watched, image) {
     this.title = title,
