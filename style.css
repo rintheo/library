@@ -1,12 +1,200 @@
+:root {
+    --color-accent: #2e51a2;
+    --color-accent-light: #3864c8;
+    --color-accent-lighter: #4277ee;
+    --color-background: #121212;
+    --color-background-lighter: #212121;
+    --color-border: #353535;
+    --color-card: #1e1e1e;
+    --color-light: #ffffff;
+}
+
 *,
 *::after,
 *::before {
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    /* border: 1px solid red; */
 }
 
 html, body,
 h1, h2, h3, h4, h5, h6,
-p {
+p, button {
     margin: 0;
     padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: currentColor;
+}
+
+.site-container {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+.header {
+    background-color: var(--color-accent);
+    color: var(--color-light);
+    padding: 0.5rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+}
+
+.header > h1 {
+    font-family: 'Lobster', cursive;
+    font-size: 2.5rem;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#userName {
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    transition: 0.1s;
+}
+
+#userImage {
+    background-color: darkgrey;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
+
+.main {
+    background-color: var(--color-background);
+    color: var(--color-light);
+    display: grid;
+    grid-template-rows: 1fr auto auto;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-auto-rows: 500px;
+    gap: 1.5rem;
+    justify-content: center;
+    padding: 3rem calc(0.5rem + 5vw);
+}
+
+.card {
+    background-color: var(--color-card);
+    display: grid;
+    grid-template-rows: 4fr auto auto auto;
+    box-shadow: 2px 2px 4px black;
+    border-radius: 1rem;
+    overflow: hidden;
+    text-align: center; 
+}
+
+.poster,
+.title,
+.studio {
+    border-bottom: 1px solid var(--color-border);
+    padding: 0.25rem;
+}
+
+.poster {
+    background-color: grey;
+    justify-self: stretch;
+}
+
+.card-bottom {
+    display: flex;
+    padding: 0.25rem;
+}
+
+.watched-button,
+.remove-button {
+    height: 1.5em;
+    width: 1.5rem;
+    margin: 0 0.5rem;
+    background: none;
+    border: none;
+    fill: var(--color-light);    
+    position: relative;
+    bottom: 0.15rem;
+}
+
+.episodes {
+    flex: 1;
+    font-size: 0.9rem;
+    font-weight: 300;  
+}
+
+.button {
+    background-color: var(--color-accent);
+    color: var(--color-light);
+    width: 9rem;
+    height: 3.5rem;
+    border-radius: 2rem;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    z-index: 2;
+    transition: 0.1s;
+}
+
+#userName:hover,
+.button:hover {
+    background-color: var(--color-accent-light);
+}
+
+#userName:active,
+.button:active {
+    background-color: var(--color-accent-lighter);
+}
+
+#newEntryButton.button {
+    margin-bottom: 2rem;
+    justify-self: center;
+    position: sticky;
+    bottom: 2rem;
+}
+
+.gradient {
+    position: sticky;
+    bottom: 0;
+    box-shadow: 0 0 3rem 3rem var(--color-background);
+}
+
+.footer {
+    padding: 0.5rem;
+    background-color: var(--color-background-lighter);
+    color: var(--color-light);
+    text-align: center;
+    z-index: 2;
+}
+
+.svg-icon {
+    display: inline-block;
+    vertical-align: bottom;
+    fill: currentColor;
+    height: 2rem;
+
+}
+
+.copyright svg:hover {
+    transition: 0.15s;
+    fill: darkgrey;
+}
+
+.credits {
+    color: var(--color-light);
+    font-size: 0.8rem;
+    color: gray;
+}
+
+.copyright {
+    line-height: 2rem;
 }
