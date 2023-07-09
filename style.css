@@ -23,10 +23,15 @@
 
 html, body,
 h1, h2, h3, h4, h5, h6,
-p, button {
+p, button, form, ul, li{
     margin: 0;
     padding: 0;
 }
+
+ul, ol, li {
+    list-style: none;
+}
+
 
 a {
     text-decoration: none;
@@ -37,6 +42,10 @@ a {
     display: grid;
     grid-template-rows: auto 1fr auto;
 }
+
+/* ------------------------------------------ */
+/*                   Header                   */
+/* ------------------------------------------ */
 
 .header {
     background-color: var(--color-accent);
@@ -76,12 +85,125 @@ a {
     border-radius: 50%;
 }
 
+/* ------------------------------------------ */
+/*                    Main                    */
+/* ------------------------------------------ */
+
 .main {
     background-color: var(--color-background);
     color: var(--color-light);
     display: grid;
-    grid-template-rows: 1fr auto auto;
+    grid-template-rows: auto auto 1fr auto auto;
 }
+
+/* ------------------------------------------ */
+/*               New Entry Form               */
+/* ------------------------------------------ */
+
+
+#newEntryOverlay.visibility-hidden,
+#newEntryButton.visibility-hidden,
+.form-container.visibility-hidden {
+    visibility: hidden;
+    opacity: 0;  
+    transition: opacity 0.25s ease, visibility 0s ease 0.25s;
+}
+
+#newEntryOverlay,
+.form-container {
+    position: fixed;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.25s ease, visibility 0s ease 0s;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+
+}
+
+#newEntryOverlay {
+    background-color: black;
+    opacity: 0.5;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+}
+
+#newEntryForm {
+    background-color: var(--color-card);
+    width: 400px;
+    height: 500px;
+    z-index: 11;
+    box-shadow: 2px 2px 4px black;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.form-header {
+    border-bottom: 1px solid var(--color-border);
+    padding: 0.5rem 1rem;
+    font-size: 1.1rem ;
+    font-weight: 600;
+    text-align: center;
+}
+
+#newEntryForm > ul {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(4, auto) 1fr;
+    padding: 2rem;
+    gap: 1.25rem;
+}
+
+.input-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-item > label {
+    margin-bottom: 0.25rem;
+}
+
+.input-item > input {
+    order: 1;
+    height: 2rem;
+    border-radius: 2rem;
+    border: none;
+    outline: none;
+    padding: 0 0.5rem;
+} 
+
+.input-item > input:focus {
+    border: 3px solid var(--color-accent-lighter);
+} 
+
+.input-item > input.touched:invalid {
+    border: 3px solid red;
+} 
+
+#input1, #input2, #input5,
+.submit {
+    grid-column: 1 / -1;
+}
+
+#newEntryEpisodes {
+    width: 5rem;
+}
+
+.submit {
+    justify-self: center;
+    align-self: end;
+    margin-bottom: 2rem;
+}
+
+/* ------------------------------------------ */
+/*                    Cards                   */
+/* ------------------------------------------ */
 
 .cards-container {
     display: grid;
@@ -197,7 +319,6 @@ a {
     font-size: 1.1rem;
     font-weight: 600;
     z-index: 2;
-    transition: 0.1s;
 }
 
 #userName:hover,
@@ -216,6 +337,7 @@ a {
     position: sticky;
     bottom: 2rem;
     box-shadow: 3px 3px 3px var(--color-background);
+    transition: 0.1s;
 }
 
 .gradient {
@@ -223,6 +345,10 @@ a {
     bottom: 0;
     box-shadow: 0 0 3rem 3rem var(--color-background);
 }
+
+/* ------------------------------------------ */
+/*                   Footer                   */
+/* ------------------------------------------ */
 
 .footer {
     padding: 0.5rem;
@@ -249,6 +375,14 @@ a {
     color: var(--color-light);
     font-size: 0.8rem;
     color: gray;
+}
+
+.credits a {
+    transition: 0.1s;
+}
+
+.credits a:hover {
+    color: darkgrey;
 }
 
 .copyright {

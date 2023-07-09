@@ -11,7 +11,11 @@ const anime1 = new Anime("Attack on Titan", "Wit Studio", 75, true, 'https://cdn
       anime11 = new Anime("Code Geass", "Sunrise", 50, true, 'https://cdn.myanimelist.net/images/anime/1032/135088.jpg'),
       anime12 = new Anime("Cowboy Bebop", "Sunrise", 26, true, 'https://cdn.myanimelist.net/images/anime/4/19644.jpg'),
       anime13 = new Anime("One Punch Man", "Madhouse", 24, false, 'https://cdn.myanimelist.net/images/anime/12/76049.jpg'),
-      anime14 = new Anime("Naruto", "Pierrot", 220, false, 'https://cdn.myanimelist.net/images/anime/13/17405.jpg');
+      anime14 = new Anime("Naruto", "Pierrot", 220, false, 'https://cdn.myanimelist.net/images/anime/13/17405.jpg'),
+      newEntryOverlay = document.querySelector('#newEntryOverlay'),
+      newEntryForm = document.querySelector('.form-container'),
+      newEntryButton = document.querySelector('#newEntryButton'),
+      cardsContainer = document.querySelector('.cards-container');
 
 let myAniLib = [anime1, anime2, anime3, anime4, anime5, anime6, anime7, anime8, anime9, anime10, anime11, anime12, anime13, anime14];
 
@@ -36,8 +40,6 @@ function addAnimeToLibrary(anime) {
 };
 
 function createCard(anime) {
-    const cardsContainer = document.querySelector('.cards-container');
-
     const divCard = document.createElement('div');
     divCard.classList.add('card');
     if (anime.watched) {divCard.classList.add('watched')};
@@ -92,9 +94,32 @@ function createCard(anime) {
     divRemove.outerHTML = svgDeleteIcon;
 }
 
+function newEntry() {
+    newEntryOverlay.classList.remove('visibility-hidden');
+    newEntryForm.classList.remove('visibility-hidden');
+    newEntryButton.classList.add('visibility-hidden');
+    newEntryForm.addEventListener('click', cancelEntry);
+}
+
+function cancelEntry(e){
+    if (e.target !== this) {return};
+    newEntryOverlay.classList.add('visibility-hidden');
+    newEntryForm.classList.add('visibility-hidden');
+    newEntryButton.classList.remove('visibility-hidden');
+    // add clear form function here too
+}
+
+newEntryButton.addEventListener('click', newEntry);
+
 document
-.querySelector('#currentYear')
-.textContent = new Date().getFullYear();
+    .querySelector('#currentYear')
+    .textContent = new Date().getFullYear();
+    
+// document
+//     .querySelector('#newEntrySubmitButton')
+//     .addEventListener('click', (e) => {
+//         e.preventDefault();
+//     });
 
 generateList(myAniLib);
 
