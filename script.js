@@ -43,6 +43,9 @@ Anime.prototype.info = function() {
 
 function generateList(animeArray) {
     animeArray.forEach(createCard);
+    document
+        .querySelectorAll('.card')
+        .forEach(addCardHoverListeners);
 }
 
 function updateList() {
@@ -119,13 +122,15 @@ function removeCard(e) {
 }
 
 function getCardIndex(e) {
+    let cardIndex;
     document
         .querySelectorAll('.card')
         .forEach(card => {
             if (card.contains(e.target)) {
-                console.log(card.getAttribute('data-card-index'))
+                cardIndex = card.getAttribute('data-card-index');
             };
         });
+    return cardIndex;
 }
 
 function newEntry() {
@@ -202,6 +207,19 @@ function untouchInput() {
     .forEach(input => {
         input.classList.remove('touched')
     });
+}
+
+function addCardHoverListeners(card) {
+    card.addEventListener('mouseenter', mouseEnterCard);
+    card.addEventListener('mouseleave', mouseLeaveCard);
+}
+
+function mouseEnterCard(e) {
+    e.target.classList.add('hover');
+}
+
+function mouseLeaveCard(e) {
+    e.target.classList.remove('hover');
 }
 
 newEntryButton.addEventListener('click', newEntry);

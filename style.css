@@ -3,14 +3,16 @@
     --color-accent-light: #3864c8;
     --color-accent-lighter: #4277ee;
     --color-background: #121212;
-    --color-background-lighter: #212121;
-    --color-border: #353535;
+    --color-background-footer: #212121;
+    --color-border: #2e2e2e;
     --color-card: #1e1e1e;
+    --color-card-lighter: #3e3e3e;
     --color-light: #ffffff;
     --color-watched: #26392a;
+    --color-watched-hover: #344838;
     --color-watched-border: #3a493e;
-    --color-watched-light: #45a758;
-    --color-watched-lighter: #4fc967;
+    --color-watched-button: #4fc967;
+    --color-watched-button-hover: #3f5545;
 }
 
 *,
@@ -237,7 +239,7 @@ a {
 
 .cards-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 250px);
+    grid-template-columns: repeat(auto-fill, 250px);
     grid-auto-rows: 450px;
     gap: 1.5rem 1rem;
     justify-content: center;
@@ -300,43 +302,67 @@ a {
 
 .card-bottom {
     display: flex;
-    padding: 0.25rem;
 }
 
 .watched-button,
 .remove-button {
-    height: 1.5em;
-    width: 1.5rem;
+    height: 2rem;
+    width: 2rem;
     margin: 0 0.5rem;
+    border-radius: 50%;
     background: none;
     border: none;
+    fill: var(--color-border);  
+    transition: 0.1s;
+}
+
+.watched-button svg,
+.remove-button svg{
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.card.hover .watched-button,
+.card.hover .remove-button {
     fill: var(--color-light);    
-    position: relative;
-    bottom: 0.15rem;
 }
 
-.card.watched .watched-button {
-    fill: var(--color-watched-lighter);
+.card.hover .watched-button:hover,
+.card.hover .remove-button:hover {
+    background: var(--color-card-lighter);
 }
 
-.card.watched .watched-button:hover {
-    fill: var(--color-watched-light);
+.card.hover .watched-button:active,
+.card.hover .remove-button:active {
+    background: var(--color-border);
 }
 
-.watched-button:hover,
-.remove-button:hover {
-    fill: lightgrey;
+.card.watched .watched-button,
+.card.watched .remove-button {
+    fill: var(--color-watched-border);    
 }
 
-.watched-button:active,
-.remove-button:active {
-    fill: darkgrey;
+
+.card.watched.hover .watched-button,
+.card.watched.hover .remove-button {
+    fill: var(--color-watched-button);
+}
+
+.card.watched.hover .watched-button:hover,
+.card.watched.hover .remove-button:hover {
+    background: var(--color-watched-button-hover);
+}
+
+.card.watched.hover .watched-button:active,
+.card.watched.hover .remove-button:active {
+    background: var(--color-watched-border);
 }
 
 .episodes {
     flex: 1;
     font-size: 0.9rem;
-    font-weight: 300;  
+    font-weight: 300; 
+    padding: 0.25rem 0; 
 }
 
 .button {
@@ -382,7 +408,7 @@ a {
 
 .footer {
     padding: 0.5rem;
-    background-color: var(--color-background-lighter);
+    background-color: var(--color-background-footer);
     color: var(--color-light);
     text-align: center;
     z-index: 2;
