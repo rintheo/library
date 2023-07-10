@@ -45,7 +45,6 @@ function generateList(animeArray) {
     animeArray.forEach(createCard);
 }
 
-
 function updateList() {
     while (cardsContainer.firstChild) {
         cardsContainer.removeChild(cardsContainer.firstChild);
@@ -57,9 +56,10 @@ function addAnimeToLibrary(anime) {
     myAniLib.push(anime);
 };
 
-function createCard(anime) {
+function createCard(anime, index) {
     const divCard = document.createElement('div');
     divCard.classList.add('card');
+    divCard.setAttribute('data-card-index', `${index}`);
     if (anime.watched) {divCard.classList.add('watched')};
 
         const divPoster = document.createElement('div');
@@ -90,6 +90,7 @@ function createCard(anime) {
 
             const buttonRemove = document.createElement('button');
             buttonRemove.classList.add('remove-button');
+            buttonRemove.addEventListener('click', removeCard);
 
                 const divRemove = document.createElement('div');
                 const svgDeleteIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Delete</title><path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" /></svg>`;
@@ -110,6 +111,21 @@ function createCard(anime) {
     
     divWatched.outerHTML = (anime.watched) ? svgWatchedIcon : svgNotWatchedIcon ;
     divRemove.outerHTML = svgDeleteIcon;
+}
+
+function removeCard(e) {
+    myAniLib.splice(getCardIndex(e), 1);
+    updateList();
+}
+
+function getCardIndex(e) {
+    document
+        .querySelectorAll('.card')
+        .forEach(card => {
+            if (card.contains(e.target)) {
+                console.log(card.getAttribute('data-card-index'))
+            };
+        });
 }
 
 function newEntry() {
