@@ -159,6 +159,7 @@ function hideEntry(){
 
 function submitEntry(e){
     if (isAnyRequiredInputEmpty()) return;
+    if (newEntryEpisodes.value < 1) return;
 
     const entry = new Anime(newEntryTitle.value, 
                             newEntryStudio.value, 
