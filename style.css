@@ -70,19 +70,27 @@ a {
 .nav {
     display: flex;
     align-items: center;
-    gap: 1rem;
+}
+
+.user-container {
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    border-radius: 2rem;
+    transition: 0.1s;
 }
 
 #userName {
-    padding: 0.5rem 1rem;
-    border-radius: 2rem;
     font-size: 1.25rem;
     font-weight: 600;
-    transition: 0.1s;
+    margin-right: 0.5rem;
 }
 
 #userImage {
     background-color: darkgrey;
+    background-image: url(https://i.imgur.com/gcaYoGM.png);
+    background-size: cover;
+    background-position: center;
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
@@ -377,12 +385,12 @@ a {
     z-index: 2;
 }
 
-#userName:hover,
+.user-container:hover,
 .button:hover {
     background-color: var(--color-accent-light);
 }
 
-#userName:active,
+.user-container:active,
 .button:active {
     background-color: var(--color-accent-lighter);
 }
