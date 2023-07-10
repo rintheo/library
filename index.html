@@ -24,6 +24,9 @@
         <form id="newEntryForm" action="">
           <div class="form-header">
             <p>New Entry</p>
+            <div id="cancelEntryButton">
+              <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>window-close</title><path d="M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z" /></svg>
+            </div>
           </div>
           <ul>
             <li id="input1" class="input-item">
@@ -41,12 +44,12 @@
             <li id="input4" class="input-item">
               <p>Status</p>
               <div>
-                <input type="radio" id="newEntryNotWatched" name="watched" value="Not Watched" checked>
-                <label for="newEntryNotWatched">To watch</label>
+                <input type="radio" id="newEntryNotWatched" name="watched" value="false" checked>
+                <label for="newEntryNotWatched">Plan to watch</label>
               </div>
               <div>
-                <input type="radio" id="newEntryWatched" name="watched" value="Watched">
-                <label for="newEntryWatched">Watched</label>
+                <input type="radio" id="newEntryWatched" name="watched" value="true">
+                <label for="newEntryWatched">Done watching</label>
               </div>
             </li>
             <li id="input5" class="input-item">

@@ -1,23 +1,33 @@
-const anime1 = new Anime("Attack on Titan", "Wit Studio", 75, true, 'https://cdn.myanimelist.net/images/anime/10/47347.jpg'),
-      anime2 = new Anime("One Piece", "Toei Animation", 1000, false, 'https://cdn.myanimelist.net/images/anime/6/73245.jpg'),
-      anime3 = new Anime("My Hero Academia", "Bones", 113, true, 'https://cdn.myanimelist.net/images/anime/10/78745.jpg'),
-      anime4 = new Anime("Death Note", "Madhouse", 37, true, 'https://cdn.myanimelist.net/images/anime/1001/121564.jpg'),
-      anime5 = new Anime("Fullmetal Alchemist: Brotherhood", "Bones", 64, true, 'https://cdn.myanimelist.net/images/anime/1208/94745.jpg'),
-      anime6 = new Anime("Demon Slayer", "ufotable", 26, true, 'https://cdn.myanimelist.net/images/anime/1286/99889.jpg'),
-      anime7 = new Anime("Hunter x Hunter", "Madhouse", 148, false, 'https://cdn.myanimelist.net/images/anime/1337/99013.jpg'),
-      anime8 = new Anime("Haikyuu!!", "Production I.G", 85, false, 'https://cdn.myanimelist.net/images/anime/7/76014.jpg'),
-      anime9 = new Anime("Steins;Gate", "White Fox", 24, true, 'https://cdn.myanimelist.net/images/anime/1935/127974.jpg'),
-      anime10 = new Anime("Sword Art Online", "A-1 Pictures", 97, true, 'https://cdn.myanimelist.net/images/anime/11/39717.jpg'),
-      anime11 = new Anime("Code Geass", "Sunrise", 50, true, 'https://cdn.myanimelist.net/images/anime/1032/135088.jpg'),
-      anime12 = new Anime("Cowboy Bebop", "Sunrise", 26, true, 'https://cdn.myanimelist.net/images/anime/4/19644.jpg'),
-      anime13 = new Anime("One Punch Man", "Madhouse", 24, false, 'https://cdn.myanimelist.net/images/anime/12/76049.jpg'),
-      anime14 = new Anime("Naruto", "Pierrot", 220, false, 'https://cdn.myanimelist.net/images/anime/13/17405.jpg'),
-      newEntryOverlay = document.querySelector('#newEntryOverlay'),
-      newEntryForm = document.querySelector('.form-container'),
+const newEntryOverlay = document.querySelector('#newEntryOverlay'),
+      newEntryForm = document.querySelector('#newEntryForm'),
+      newEntryFormContainer = document.querySelector('.form-container'),
       newEntryButton = document.querySelector('#newEntryButton'),
-      cardsContainer = document.querySelector('.cards-container');
+      newEntrySubmitButton = document.querySelector('#newEntrySubmitButton'),
+      cancelEntryButton = document.querySelector('#cancelEntryButton'),
+      cardsContainer = document.querySelector('.cards-container'),
+      newEntryTitle = document.querySelector('input[name="title"]'),
+      newEntryStudio = document.querySelector('input[name="studio"]'),
+      newEntryEpisodes = document.querySelector('input[name="episodes"]'),
+      newEntryWatched = document.getElementsByName('watched'),
+      newEntryImage = document.querySelector('input[name="image"]');
 
-let myAniLib = [anime1, anime2, anime3, anime4, anime5, anime6, anime7, anime8, anime9, anime10, anime11, anime12, anime13, anime14];
+// Initial library of animes
+let myAniLib = [
+    new Anime("Attack on Titan", "Wit Studio", 75, true, 'https://cdn.myanimelist.net/images/anime/10/47347.jpg'),
+    new Anime("Naruto", "Pierrot", 220, false, 'https://cdn.myanimelist.net/images/anime/13/17405.jpg'),
+    new Anime("One Piece", "Toei Animation", 1000, false, 'https://cdn.myanimelist.net/images/anime/6/73245.jpg'),
+    new Anime("My Hero Academia", "Bones", 113, true, 'https://cdn.myanimelist.net/images/anime/10/78745.jpg'),
+    new Anime("Death Note", "Madhouse", 37, true, 'https://cdn.myanimelist.net/images/anime/1001/121564.jpg'),
+    new Anime("Fullmetal Alchemist: Brotherhood", "Bones", 64, true, 'https://cdn.myanimelist.net/images/anime/1208/94745.jpg'),
+    new Anime("Demon Slayer", "ufotable", 26, true, 'https://cdn.myanimelist.net/images/anime/1286/99889.jpg'),
+    new Anime("Hunter x Hunter", "Madhouse", 148, false, 'https://cdn.myanimelist.net/images/anime/1337/99013.jpg'),
+    new Anime("Haikyuu!!", "Production I.G", 85, false, 'https://cdn.myanimelist.net/images/anime/7/76014.jpg'),
+    new Anime("Steins;Gate", "White Fox", 24, true, 'https://cdn.myanimelist.net/images/anime/1935/127974.jpg'),
+    new Anime("Sword Art Online", "A-1 Pictures", 97, true, 'https://cdn.myanimelist.net/images/anime/11/39717.jpg'),
+    new Anime("Code Geass", "Sunrise", 50, true, 'https://cdn.myanimelist.net/images/anime/1032/135088.jpg'),
+    new Anime("Cowboy Bebop", "Sunrise", 26, true, 'https://cdn.myanimelist.net/images/anime/4/19644.jpg'),
+    new Anime("One Punch Man", "Madhouse", 24, false, 'https://cdn.myanimelist.net/images/anime/12/76049.jpg'),
+];
 
 function Anime(title, studio, episodes, watched, image) {
     this.title = title,
@@ -33,6 +43,14 @@ Anime.prototype.info = function() {
 
 function generateList(animeArray) {
     animeArray.forEach(createCard);
+}
+
+
+function updateList() {
+    while (cardsContainer.firstChild) {
+        cardsContainer.removeChild(cardsContainer.firstChild);
+    }
+    generateList(myAniLib);
 }
 
 function addAnimeToLibrary(anime) {
@@ -96,30 +114,97 @@ function createCard(anime) {
 
 function newEntry() {
     newEntryOverlay.classList.remove('visibility-hidden');
-    newEntryForm.classList.remove('visibility-hidden');
+    newEntryFormContainer.classList.remove('visibility-hidden');
     newEntryButton.classList.add('visibility-hidden');
-    newEntryForm.addEventListener('click', cancelEntry);
+}
+
+function cancelEntryFromOverlay(e) {
+    if (!isAllRequiredInputEmpty()) return;
+    if (e.target !== this) {return};
+    cancelEntry();
 }
 
 function cancelEntry(e){
-    if (e.target !== this) {return};
+    untouchInput()
+    hideEntry();
+    resetEntry();
+}
+
+function hideEntry(){
     newEntryOverlay.classList.add('visibility-hidden');
-    newEntryForm.classList.add('visibility-hidden');
+    newEntryFormContainer.classList.add('visibility-hidden');
     newEntryButton.classList.remove('visibility-hidden');
-    // add clear form function here too
+}
+
+function submitEntry(e){
+    if (isAnyRequiredInputEmpty()) return;
+
+    const entry = new Anime(newEntryTitle.value, 
+                            newEntryStudio.value, 
+                            newEntryEpisodes.value, 
+                            newEntryWatchedValue(),
+                            newEntryImage.value);
+    myAniLib.push(entry);
+    updateList();
+    untouchInput()
+    resetEntry();
+    hideEntry();
+    e.preventDefault();
+}
+
+function resetEntry() {
+    newEntryForm.reset();
+}
+
+function newEntryWatchedValue() {
+    for (let option in newEntryWatched) {
+        if (newEntryWatched[option].checked) {
+            return (newEntryWatched[option].value === "true") ? true : false;
+        }
+    }
+}
+
+function isAnyRequiredInputEmpty() {
+    return (newEntryTitle.value === "") ||
+           (newEntryStudio.value === "") ||
+           (newEntryEpisodes.value === "") ? true : false;
+}
+
+function isAllRequiredInputEmpty() {
+    return (newEntryTitle.value === "") &&
+           (newEntryStudio.value === "") &&
+           (newEntryEpisodes.value === "") ? true : false;
+}
+
+function touchInput(e) {
+    e.target.classList.add('touched');
+}
+
+function untouchInput() {
+    document
+    .querySelectorAll('input')
+    .forEach(input => {
+        input.classList.remove('touched')
+    });
 }
 
 newEntryButton.addEventListener('click', newEntry);
+newEntrySubmitButton.addEventListener('click', submitEntry);
+newEntryFormContainer.addEventListener('click', cancelEntryFromOverlay);
+cancelEntryButton.addEventListener('click', cancelEntry);
+
+document
+    .querySelectorAll('input')
+    .forEach(input => {
+        input.addEventListener('blur', touchInput)
+    });
 
 document
     .querySelector('#currentYear')
     .textContent = new Date().getFullYear();
     
-// document
-//     .querySelector('#newEntrySubmitButton')
-//     .addEventListener('click', (e) => {
-//         e.preventDefault();
-//     });
-
 generateList(myAniLib);
+
+
+
 

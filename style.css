@@ -149,6 +149,22 @@ a {
     font-size: 1.1rem ;
     font-weight: 600;
     text-align: center;
+    position: relative;
+}
+
+.form-header svg {
+    position: absolute;
+    height: 1.5rem;
+    top: 0.4rem;
+    right: 0.6rem;
+}
+
+.form-header svg:hover {
+    color: lightgrey;
+}
+
+.form-header svg:active {
+    color: darkgrey;
 }
 
 #newEntryForm > ul {
@@ -169,6 +185,15 @@ a {
     margin-bottom: 0.25rem;
 }
 
+.input-item > input:required + label::after {
+    content: ' *';
+    color: red;
+}
+
+.input-item > input.touched:invalid + label {
+    color: red;
+}
+
 .input-item > input {
     order: 1;
     height: 2rem;
@@ -183,6 +208,10 @@ a {
 } 
 
 .input-item > input.touched:invalid {
+    border: 1px solid red;
+} 
+
+.input-item > input.touched:invalid:focus {
     border: 3px solid red;
 } 
 
@@ -208,7 +237,7 @@ a {
 .cards-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, 250px);
-    grid-auto-rows: 500px;
+    grid-auto-rows: 450px;
     gap: 1.5rem 1rem;
     justify-content: center;
     padding: 3rem 1vw;
@@ -363,7 +392,6 @@ a {
     vertical-align: bottom;
     fill: currentColor;
     height: 2rem;
-
 }
 
 .copyright svg:hover {
