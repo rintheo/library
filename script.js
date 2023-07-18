@@ -10,6 +10,24 @@ const newEntryOverlay = document.querySelector('#newEntryOverlay'),
       newEntryWatched = document.getElementsByName('watched'),
       newEntryImage = document.querySelector('input[name="image"]');
 
+class Anime {
+    constructor(title, studio, episodes, watched, image) {
+        this.title = title;
+        this.studio = studio;
+        this.episodes = episodes;
+        this.watched = watched;
+        this.image = image;
+    }
+
+    info() {
+        return `Title: ${this.title}, Studio: ${this.studio}, Episodes: ${this.episodes}, Watched: ${this.watched}`;
+    }
+
+    watchedToggle() {
+        this.watched = this.watched ? false : true;
+    }
+}
+
 // Initial library of animes
 let myAniLib = [
     new Anime("Attack on Titan", "Wit Studio", 75, true, 'https://cdn.myanimelist.net/images/anime/10/47347.jpg'),
@@ -27,22 +45,6 @@ let myAniLib = [
     new Anime("Cowboy Bebop", "Sunrise", 26, true, 'https://cdn.myanimelist.net/images/anime/4/19644.jpg'),
     new Anime("One Punch Man", "Madhouse", 24, false, 'https://cdn.myanimelist.net/images/anime/12/76049.jpg'),
 ]
-
-function Anime(title, studio, episodes, watched, image) {
-    this.title = title,
-    this.studio = studio,
-    this.episodes = episodes,
-    this.watched = watched,
-    this.image = image
-}
-
-Anime.prototype.info = function() {
-    return `Title: ${this.title}, Studio: ${this.studio}, Episodes: ${this.episodes}, Watched: ${this.watched}`;
-}
-
-Anime.prototype.watchedToggle = function () {
-    this.watched = this.watched ? false : true;
-}
 
 function generateList(animeArray) {
     animeArray.forEach(createCard);
